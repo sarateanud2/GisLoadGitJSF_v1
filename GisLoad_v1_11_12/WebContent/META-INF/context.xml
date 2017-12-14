@@ -1,0 +1,8 @@
+<Context>
+
+<Resource name="jdbc/ascop_v20_11" auth="Container"
+          type="javax.sql.DataSource" driverClassName="org.postgresql.Driver"
+          url="jdbc:postgresql://127.0.0.1:5432/ascop_v20_11"
+          username="postgres" password="Apple2017!" maxActive="20" maxIdle="10"
+			maxWait="-1"/>
+</Context>
