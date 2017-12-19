@@ -1,4 +1,4 @@
-package md.cadastre.dbconnection;
+package md.cadastre.objects;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 import org.slf4j.LoggerFactory;
 
+import md.cadastre.dbconnection.Database;
 import md.cadastre.settingsparam.DbUtilities;
 
 public class Terenuri {
