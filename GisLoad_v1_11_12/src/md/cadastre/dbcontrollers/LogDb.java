@@ -84,5 +84,33 @@ public class LogDb {
         }
 	}
 	
+	public static String setUploadStats(Metadata m) {
+		try {
+			connection = Database.getConnectionPG();
+			String sql = "INSERT INTO gisadm.t_upload_stats (uploadid, upload_objects, object_with_codcad, object_deleted_etalon, object_inserted_etalon, object_inserted_oracle, object_deleted_oracle, object_mapinfo) values (?,?,?,?,?,?,?,?)";
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, m.getUploadid());
+            stmt.setInt(2, m.getCountRowsUploaded());
+            stmt.setInt(3, m.getCountCodCadastralExists());
+            stmt.setInt(4, m.getRowsSynchronizeDeleted());
+            stmt.setInt(5, m.getRowsSynchronizeInserted());
+            stmt.setInt(6, m.getCountInsertedOracle());
+            stmt.setInt(7, m.getCountDeletedOracle());
+            stmt.setInt(8, m.getCountMapinfo());
+            stmt.executeUpdate();
+		} catch (SQLException ex) {
+            logger.error(ex.getMessage() + "|" + Arrays.toString(ex.getStackTrace()));
+            logger.error(DbUtilities.printSQLException(ex));
+        } finally {
+        	try {
+				Database.closeConnections(stmt, rs, connection);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+        }
+		
+		return null;
+	}
+	
 	
 }
