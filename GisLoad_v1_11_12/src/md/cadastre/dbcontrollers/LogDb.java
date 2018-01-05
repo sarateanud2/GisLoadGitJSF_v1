@@ -85,6 +85,7 @@ public class LogDb {
 	}
 	
 	public static String setUploadStats(Metadata m) {
+		int id = 0;
 		try {
 			connection = Database.getConnectionPG();
 			String sql = "INSERT INTO gisadm.t_upload_stats (uploadid, upload_objects, object_with_codcad, object_deleted_etalon, object_inserted_etalon, object_inserted_oracle, object_deleted_oracle, object_mapinfo) values (?,?,?,?,?,?,?,?)";
@@ -109,7 +110,7 @@ public class LogDb {
 			}
         }
 		
-		return null;
+		return getLog(id);
 	}
 	
 	
