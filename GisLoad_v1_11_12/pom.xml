@@ -78,12 +78,7 @@
             <version>1.1.2</version>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.github.noraui/ojdbc7 -->
-	    <dependency>
-	        <groupId>com.github.noraui</groupId>
-	        <artifactId>ojdbc7</artifactId>
-	        <version>12.1.0.2</version>
-	    </dependency>
+
         
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
