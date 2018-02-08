@@ -55,4 +55,9 @@ public class SyncronizeOracle {
     	return result;
     }
 
+	public boolean deleteCadzone(String cadzone, String terenuriTableOracle, Metadata m) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

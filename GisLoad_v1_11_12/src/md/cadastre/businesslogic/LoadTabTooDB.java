@@ -74,7 +74,7 @@ public class LoadTabTooDB {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	}
+        }
     }
     
     
@@ -103,6 +103,47 @@ public class LoadTabTooDB {
         }
     }
     
+    public boolean startUpload(Metadata m) {
+    	boolean isSuccess = false;
+    	try {
+            int result = -1;
+            int counter = 0;
+            do {
+                counter++;
+                result = executeCommand(m);
+                if (result == -10 || result == -20) {
+                    Upload upl = new Upload();
+                    upl.deleteErrorCadzone(this.cadZone);
+                    return false;
+                } else if (result != 0) {
+                    Thread.sleep(10000);
+                }
+            } while (result != 0 && counter <= 3);
+            
+            
+            
+    	}catch (Exception ex) {
+    		logger.error(ex.getMessage() + ";" + Arrays.toString(ex.getStackTrace()));
+            System.out.println(ex.getMessage());
+            return false;
+		}
+    	
+    	Verification vt = new Verification(this.uploadId);
+    	isSuccess = vt.startVerification(m);
+    	
+    	if (!isSuccess) {
+            return false;
+        }
+    	
+    	isSuccess = CadastralObjects.checkDiff(this.cadZone, this.fileType, this.dir, m);
+        if (!isSuccess) {
+            return false;
+        }
+    	
+    	
+    	
+    	return isSuccess;
+    }
     
 //	Get/Set
 	public int getErrorflag() {

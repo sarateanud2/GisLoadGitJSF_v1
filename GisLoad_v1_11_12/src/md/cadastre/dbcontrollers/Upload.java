@@ -11,6 +11,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import md.cadastre.businesslogic.LoadTabTooDB;
 import md.cadastre.dbconnection.Database;
 import md.cadastre.objects.UploadDetails;
 import md.cadastre.settingsparam.DbUtilities;
@@ -34,6 +35,16 @@ public class Upload {
         m.setFileid(fileid);
         m.setUploadid(uploadid);
         LogDb.setLog(m.getUploadid(), m.getCadzone(), m.getFileid(), 0, "Start upload");
+        LoadTabTooDB lt = new LoadTabTooDB(uploadid, m);
+        boolean result = lt.startUpload(m);
+        LogDb.setUploadStats(m);
+        if(!result){
+            //insertErrorCadzone(cadzone);
+            LogDb.setLog(m.getUploadid(), m.getCadzone(), m.getFileid(), 1, "Upload Finished unsuccessfully");
+        }else{
+            deleteErrorCadzone(cadzone);
+        }
+        LogDb.setLog(m.getUploadid(), m.getCadzone(), m.getFileid(), 0, "End upload");
 	}
 	
 	
